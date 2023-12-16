@@ -1,4 +1,7 @@
 
+GIT_REPOSITORY_ID ?= definition-driven-development
+GIT_USER_ID ?= edenreich
+
 help:
 	@echo "Usage: make [target]"
 	@echo "Targets:"
@@ -28,8 +31,8 @@ generate-sdk-go:
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
 		-g go \
-		--git-repo-id definition-driven-development \
-		--git-user-id edenreich \
+		--git-repo-id $(GIT_REPOSITORY_ID) \
+		--git-user-id $(GIT_USER_ID) \
 		--package-name sdk \
 		-o sdk/go
 
@@ -40,8 +43,8 @@ generate-api:
 		-i cats_api.yaml \
 		-g go-server \
 		-t templates/go-server \
-		--git-repo-id definition-driven-development \
-		--git-user-id edenreich \
+		--git-repo-id $(GIT_REPOSITORY_ID) \
+		--git-user-id $(GIT_USER_ID) \
 		--package-name api \
 		-o api
 
@@ -51,8 +54,8 @@ generate-protobuf-schema:
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
 		-g protobuf-schema \
-		--git-repo-id definition-driven-development \
-		--git-user-id edenreich \
+		--git-repo-id $(GIT_REPOSITORY_ID) \
+		--git-user-id $(GIT_USER_ID) \
 		--package-name sdk \
 		-o protobuf
 
@@ -65,8 +68,8 @@ regenerate-sdk-go:
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
 		-g go \
-		--git-repo-id definition-driven-development \
-		--git-user-id edenreich \
+		--git-repo-id $(GIT_REPOSITORY_ID) \
+		--git-user-id $(GIT_USER_ID) \
 		--package-name sdk \
 		-o sdk/go
 
@@ -78,8 +81,8 @@ regenerate-api:
 		-i cats_api.yaml \
 		-g go-server \
 		-t templates/go-server \
-		--git-repo-id definition-driven-development \
-		--git-user-id edenreich \
+		--git-repo-id $(GIT_REPOSITORY_ID) \
+		--git-user-id $(GIT_USER_ID) \
 		--package-name api \
 		-o api
 
@@ -90,8 +93,8 @@ regenerate-protobuf-schema:
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
 		-g protobuf-schema \
-		--git-repo-id definition-driven-development \
-		--git-user-id edenreich \
+		--git-repo-id $(GIT_REPOSITORY_ID) \
+		--git-user-id $(GIT_USER_ID) \
 		--package-name sdk \
 		-o protobuf
 
