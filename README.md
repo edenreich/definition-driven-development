@@ -50,6 +50,15 @@ Utilizing pre-existing templates empowers us to select the generated API code se
 
 By overriding the default templates, we gain the ability to delve into specific implementation details, thereby enhancing the speed of development. This flexibility ensures a tailored approach that aligns precisely with the project's distinctive needs.
 
+Let's modify an existing template:
+
+1. First let's fetch the template:
+```bash
+make openapi ARGS='author template -g go-server -o templates/api'
+```
+2. Modify it.
+3. Modify the generate command by adding `-t templates/api`.
+
 ## Todos
 
 - [ ] add example template and explanation how to modify the generated code
