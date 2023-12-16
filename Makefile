@@ -14,7 +14,7 @@ default: help
 generate-sdk-go:
 	@echo "Generating go client..."
 	@docker run --rm \
-		-v $(PWD):/local openapitools/openapi-generator-cli generate \
+		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i /local/cats_api.yaml \
 		-g go \
 		-o /local/sdk/go
@@ -22,7 +22,7 @@ generate-sdk-go:
 generate-api:
 	@echo "Generating go server..."
 	@docker run --rm \
-		-v $(PWD):/local openapitools/openapi-generator-cli generate \
+		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i /local/cats_api.yaml \
 		-g go-server \
 		-o /local/api
@@ -40,6 +40,6 @@ tidy-api:
 tidy: tidy-sdk-go tidy-api
 
 openapi:
-	@docker run --rm -v $(PWD):/local openapitools/openapi-generator-cli
+	@docker run --rm -v $(PWD):/local -w /local openapitools/openapi-generator-cli $(ARGS)
 
 .PHONY: generate-sdk-go generate-api generate tidy-sdk-go tidy-api tidy openapi
