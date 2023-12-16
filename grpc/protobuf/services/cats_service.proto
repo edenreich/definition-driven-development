@@ -15,6 +15,7 @@ package openapitools.services.catsservice;
 import "google/protobuf/empty.proto";
 import public "models/cat.proto";
 import public "models/created_cat.proto";
+import public "models/updated_cat.proto";
 
 service CatsService {
   rpc CreateCat (CreateCatRequest) returns (google.protobuf.Empty);
@@ -43,7 +44,7 @@ message GetCatsResponse {
 
 message UpdateCatRequest {
   string id = 1;
-  Cat cat = 2;
+  UpdatedCat updatedCat = 2;
 
 }
 

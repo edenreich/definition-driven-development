@@ -200,7 +200,7 @@ No authorization required
 
 ## UpdateCat
 
-> UpdateCat(ctx, id).Cat(cat).Execute()
+> UpdateCat(ctx, id).UpdatedCat(updatedCat).Execute()
 
 Update information about a specific cat
 
@@ -218,11 +218,11 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	cat := *openapiclient.NewCat("Name_example", "Breed_example", int32(123)) // Cat | 
+	updatedCat := *openapiclient.NewUpdatedCat("Name_example", "Breed_example", int32(123)) // UpdatedCat | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.CatsAPI.UpdateCat(context.Background(), id).Cat(cat).Execute()
+	r, err := apiClient.CatsAPI.UpdateCat(context.Background(), id).UpdatedCat(updatedCat).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.UpdateCat``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -246,7 +246,7 @@ Other parameters are passed through a pointer to a apiUpdateCatRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **cat** | [**Cat**](Cat.md) |  | 
+ **updatedCat** | [**UpdatedCat**](UpdatedCat.md) |  | 
 
 ### Return type
 

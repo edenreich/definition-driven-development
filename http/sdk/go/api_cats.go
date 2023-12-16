@@ -311,11 +311,11 @@ type ApiUpdateCatRequest struct {
 	ctx context.Context
 	ApiService *CatsAPIService
 	id string
-	cat *Cat
+	updatedCat *UpdatedCat
 }
 
-func (r ApiUpdateCatRequest) Cat(cat Cat) ApiUpdateCatRequest {
-	r.cat = &cat
+func (r ApiUpdateCatRequest) UpdatedCat(updatedCat UpdatedCat) ApiUpdateCatRequest {
+	r.updatedCat = &updatedCat
 	return r
 }
 
@@ -357,8 +357,8 @@ func (a *CatsAPIService) UpdateCatExecute(r ApiUpdateCatRequest) (*http.Response
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.cat == nil {
-		return nil, reportError("cat is required and must be specified")
+	if r.updatedCat == nil {
+		return nil, reportError("updatedCat is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -379,7 +379,7 @@ func (a *CatsAPIService) UpdateCatExecute(r ApiUpdateCatRequest) (*http.Response
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cat
+	localVarPostBody = r.updatedCat
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err

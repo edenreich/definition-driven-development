@@ -63,7 +63,7 @@ func (s *CatsAPIService) GetCats(ctx context.Context) (ImplResponse, error) {
 }
 
 // UpdateCat - Update information about a specific cat
-func (s *CatsAPIService) UpdateCat(ctx context.Context, id string, cat Cat) (ImplResponse, error) {
+func (s *CatsAPIService) UpdateCat(ctx context.Context, id string, updatedCat UpdatedCat) (ImplResponse, error) {
 	// TODO - update UpdateCat with the required logic for this service method.
 	// Add api_cats_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 

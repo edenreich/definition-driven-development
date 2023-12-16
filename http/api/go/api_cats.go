@@ -138,22 +138,22 @@ func (c *CatsAPIController) UpdateCat(w http.ResponseWriter, r *http.Request) {
 		c.errorHandler(w, r, &RequiredError{"id"}, nil)
 		return
 	}
-	catParam := Cat{}
+	updatedCatParam := UpdatedCat{}
 	d := json.NewDecoder(r.Body)
 	d.DisallowUnknownFields()
-	if err := d.Decode(&catParam); err != nil {
+	if err := d.Decode(&updatedCatParam); err != nil {
 		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
 		return
 	}
-	if err := AssertCatRequired(catParam); err != nil {
+	if err := AssertUpdatedCatRequired(updatedCatParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	if err := AssertCatConstraints(catParam); err != nil {
+	if err := AssertUpdatedCatConstraints(updatedCatParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.UpdateCat(r.Context(), idParam, catParam)
+	result, err := c.service.UpdateCat(r.Context(), idParam, updatedCatParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

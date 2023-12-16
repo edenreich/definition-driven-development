@@ -35,5 +35,5 @@ type CatsAPIServicer interface {
 	CreateCat(context.Context, CreatedCat) (ImplResponse, error)
 	GetCat(context.Context, string) (ImplResponse, error)
 	GetCats(context.Context) (ImplResponse, error)
-	UpdateCat(context.Context, string, Cat) (ImplResponse, error)
+	UpdateCat(context.Context, string, UpdatedCat) (ImplResponse, error)
 }
