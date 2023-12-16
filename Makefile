@@ -68,7 +68,6 @@ generate-protobuf-schema:
 		-t templates/protobuf-schema \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
 		--git-user-id $(GIT_USER_ID) \
-		--package-name sdk \
 		-o protobuf
 
 generate: generate-sdk-go generate-api generate-protobuf-schema
@@ -109,7 +108,6 @@ regenerate-protobuf-schema:
 		-t templates/protobuf-schema \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
 		--git-user-id $(GIT_USER_ID) \
-		--package-name sdk \
 		-o protobuf
 
 regenerate: regenerate-sdk-go regenerate-api regenerate-protobuf-schema
