@@ -15,17 +15,17 @@ generate-sdk-go:
 	@echo "Generating go client..."
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
-		-i /local/cats_api.yaml \
+		-i cats_api.yaml \
 		-g go \
-		-o /local/sdk/go
+		-o sdk/go
 
 generate-api:
 	@echo "Generating go server..."
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
-		-i /local/cats_api.yaml \
+		-i cats_api.yaml \
 		-g go-server \
-		-o /local/api
+		-o api
 
 generate: generate-sdk-go generate-api
 
