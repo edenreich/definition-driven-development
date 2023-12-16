@@ -61,7 +61,6 @@ make openapi ARGS='author template -g go-server -o templates/api'
 
 ## Todos
 
-- [ ] add example template and explanation how to modify the generated code
-- [ ] generate metrics based of customisations attributes in the OAS
 - [ ] search for OAS gRPC templates to generate the proto files
 - [ ] cover virtual services / mocked services
+- [ ] generate metrics based of customisations attributes in the OAS
