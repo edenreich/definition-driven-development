@@ -49,3 +49,4 @@ By overriding the default templates, we gain the ability to delve into specific 
 ## Todos
 
 - [ ] add example template and explanation how to modiy the generated code
+- [ ] generate metrics based of customisations attributes in the OAS
