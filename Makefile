@@ -21,6 +21,7 @@ help:
 	@echo "  test-sdk-go                   Test the go SDK"
 	@echo "  test                          Test the API and SDK's"
 	@echo "  openapi                       Run the openapi-generator-cli"
+	@echo "  clean                         Clean the SDK's, proto files and API"
 	@echo "  help                          Show this help message"
 
 default: help
@@ -126,5 +127,10 @@ test: test-sdk-go test-api
 
 openapi:
 	@docker run --rm -v $(PWD):/local -w /local openapitools/openapi-generator-cli $(ARGS)
+
+clean:
+	@rm -rf api
+	@rm -rf sdk
+	@rm -rf protobuf
 
 .PHONY: generate-sdk-go generate-api generate-protobuf-schema generate regenerate-sdk-go regenerate-api regenerate-protobuf-schema regenerate tidy-sdk-go tidy-api tidy run-api test-api test-sdk-go test openapi
