@@ -17,6 +17,8 @@ generate-sdk-go:
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
 		-g go \
+		--git-repo-id definition-driven-development \
+		--git-user-id edenreich \
 		-o sdk/go
 
 generate-api:
@@ -25,6 +27,9 @@ generate-api:
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
 		-g go-server \
+		-t templates/go-server \
+		--git-repo-id definition-driven-development \
+		--git-user-id edenreich \
 		-o api
 
 generate: generate-sdk-go generate-api
