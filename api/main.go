@@ -13,7 +13,7 @@ import (
 	"log"
 	"net/http"
 
-	openapi "github.com/GIT_USER_ID/GIT_REPO_ID/go"
+	openapi "github.com/edenreich/definition-driven-development/go"
 )
 
 func main() {
