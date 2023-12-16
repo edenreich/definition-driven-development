@@ -33,7 +33,7 @@ Make the adjustments to those files you don't want to generate.
 Let's say a new business requirements arrive at the table. They need a new endpoint.
 
 1. Check out a new branch from the `main` upstream.
-2. Design the endpoint by adjusting the souce of truth, the OAS (`cats_api.yaml`).
+2. Design the endpoint by adjusting the source of truth, the OAS (`cats_api.yaml`).
 3. Run `make generate`. Which will run the `openapi-generator-cli` for generating the `client` and `server`
 4. Fill in the todos and write the business logic / implementation.
 5. Create a Pull Request / Merge Request.
