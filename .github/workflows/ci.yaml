@@ -22,5 +22,12 @@ jobs:
     - name: Validate OpenAPI
       run: make openapi ARGS='validate -i pets_api.yaml'
 
+    - name: Validate Dirty
+      run: |
+        make generate
+        make tidy
+        git diff --exit-code
+
+
     - name: Test
       run: make test
