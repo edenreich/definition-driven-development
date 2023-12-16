@@ -54,10 +54,10 @@ Let's modify an existing template:
 
 1. First let's fetch the template:
 ```bash
-make openapi ARGS='author template -g go-server -o templates/api'
+make openapi ARGS='author template -g go-server -o templates/go-server'
 ```
 2. Modify it.
-3. Modify the generate command by adding `-t templates/api`.
+3. Modify the generate command by adding `-t templates/go-server`.
 
 A variety of additional templates crafted by the open-source community are available for selection:
 
