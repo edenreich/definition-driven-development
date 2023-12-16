@@ -16,7 +16,7 @@ Parallel Development is one of the key benefits of this approach. With a well-es
 
 Once the interface is well-defined, it's also possible to adjust specific requirements and focus on generating only the things that are frequently changing from that interface.
 
-Relying on OAS as the source of truth enables us to leverage the latest OAS version, specifically version 3.0.0 and beyond. As of the time of writing, when employing tools such as Swaggo, which generates OAS from Go code using annotations, there is a constraint limiting compatibility to OAS version 2.0.0.
+Relying on OAS as the source of truth enables us to leverage the latest OAS version, specifically version 3.0.0 and beyond. As of the time of writing, when employing tools such as Swaggo, which generates OAS from Go code using annotations, there is a constraint limiting compatibility to OAS version 2.0.0. Furthermore, being independent of the annotations tied to a particular programming language enhances our flexibility, making us language-agnostic.
 
 ## One-Off / Initialize a Project
 
