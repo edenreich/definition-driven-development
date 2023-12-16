@@ -1,4 +1,5 @@
 
+OPENAPI_SPEC ?= cats_api.yaml
 GIT_REPOSITORY_ID ?= definition-driven-development
 GIT_USER_ID ?= edenreich
 
@@ -38,7 +39,7 @@ generate-sdk-go:
 	@echo "Generating go SDK..."
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
-		-i cats_api.yaml \
+		-i $(OPENAPI_SPEC) \
 		-g go \
 		-t templates/go \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
@@ -50,7 +51,7 @@ generate-api:
 	@echo "Generating go API..."
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
-		-i cats_api.yaml \
+		-i $(OPENAPI_SPEC) \
 		-g go-server \
 		-t templates/go-server \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
@@ -62,7 +63,7 @@ generate-protobuf-schema:
 	@echo "Generating protobuf schema..."
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
-		-i cats_api.yaml \
+		-i $(OPENAPI_SPEC) \
 		-g protobuf-schema \
 		-t templates/protobuf-schema \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
@@ -77,7 +78,7 @@ regenerate-sdk-go:
 	@rm -rf sdk/go
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
-		-i cats_api.yaml \
+		-i $(OPENAPI_SPEC) \
 		-g go \
 		-t templates/go \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
@@ -90,7 +91,7 @@ regenerate-api:
 	@rm -rf api
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
-		-i cats_api.yaml \
+		-i $(OPENAPI_SPEC) \
 		-g go-server \
 		-t templates/go-server \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
@@ -103,7 +104,7 @@ regenerate-protobuf-schema:
 	@rm -rf protobuf
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
-		-i cats_api.yaml \
+		-i $(OPENAPI_SPEC) \
 		-g protobuf-schema \
 		-t templates/protobuf-schema \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
