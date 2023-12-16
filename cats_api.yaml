@@ -13,6 +13,7 @@ paths:
     get:
       tags:
         - Cats
+      operationId: getCats
       summary: Get a list of all cats
       responses:
         '200':
@@ -37,6 +38,7 @@ paths:
     post:
       tags:
         - Cats
+      operationId: createCat
       summary: Create a new cat
       requestBody:
         required: true
@@ -67,6 +69,7 @@ paths:
     get:
       tags:
         - Cats
+      operationId: getCat
       summary: Get information about a specific cat
       parameters:
         - name: id
@@ -92,6 +95,7 @@ paths:
     put:
       tags:
         - Cats
+      operationId: updateCat
       summary: Update information about a specific cat
       parameters:
         - name: id
