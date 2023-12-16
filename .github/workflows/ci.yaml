@@ -19,10 +19,10 @@ jobs:
       with:
         go-version: '1.21'
 
-    - name: Validate OpenAPI
+    - name: Validate OpenAPI Specification
       run: make openapi ARGS='validate -i pets_api.yaml'
 
-    - name: Validate Dirty
+    - name: Validate Dirty Workspace
       run: |
         make generate
         make tidy
