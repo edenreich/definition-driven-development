@@ -79,6 +79,7 @@ regenerate-sdk-go:
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
 		-g go \
+		-t templates/go \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
 		--git-user-id $(GIT_USER_ID) \
 		--package-name sdk \
@@ -104,6 +105,7 @@ regenerate-protobuf-schema:
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
 		-g protobuf-schema \
+		-t templates/protobuf-schema \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
 		--git-user-id $(GIT_USER_ID) \
 		--package-name sdk \
