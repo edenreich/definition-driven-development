@@ -52,3 +52,4 @@ By overriding the default templates, we gain the ability to delve into specific 
 
 - [ ] add example template and explanation how to modify the generated code
 - [ ] generate metrics based of customisations attributes in the OAS
+- [ ] search for OAS gRPC templates to generate the proto files
