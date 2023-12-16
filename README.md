@@ -3,7 +3,8 @@
 - [Definition-Driven Development](#definition-driven-development)
   - [One-Off / Initialize a Project](#one-off--initialize-a-project)
   - [Development Process](#development-process)
-  - [Fine-Tuning](#fine-tuning)
+  - [Customization](#customization)
+  - [Todos](#todos)
 
 It's not a new concept, yet it has gained more popularity over the last few years due to an improvements in existing tooling.
 
@@ -37,6 +38,14 @@ Let's say a new business requirements arrive at the table. They need a new endpo
 
 Let's say those who work on the `client` are on a different team than those who work on the `server`. In that scenario, you can still generate the code for the `client` even on a completely separate repository, but the interface (the `OpenAPI Specification`) has to be with the same version. This way, teams can first design the specification and then work in parallel.
 
-## Fine-Tuning
+## Customization
 
-Every project has individual requirements; therefore, this part is probably the hardest part of the equation. Yet, once you get it set up correctly, the flow and the small amount of changes needed for implementing something will reward the velocity of the development.
+Every project comes with unique requirements, making this aspect likely the most challenging part of the equation. However, once you successfully establish the setup, the subsequent workflow and minimal adjustments required for implementation can significantly boost the development velocity.
+
+Utilizing pre-existing templates empowers us to select the generated API code seamlessly. There are instances, though, where bespoke templates become necessary, and fortunately, it's entirely feasible to override the existing ones.
+
+By overriding the default templates, we gain the ability to delve into specific implementation details, thereby enhancing the speed of development. This flexibility ensures a tailored approach that aligns precisely with the project's distinctive needs.
+
+## Todos
+
+- [ ] add example template and explanation how to modiy the generated code
