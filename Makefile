@@ -1,5 +1,5 @@
 
-OPENAPI_SPEC ?= cats_api.yaml
+OPENAPI_SPEC ?= pets_api.yaml
 OPENAPI_GENERATOR_IMAGE ?= openapitools/openapi-generator-cli
 GIT_REPOSITORY_ID ?= definition-driven-development
 GIT_USER_ID ?= edenreich

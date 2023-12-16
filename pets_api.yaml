@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  title: Cat API
-  description: A simple API to manage cats
+  title: Pets API
+  description: A simple API to manage pets
   version: 1.0.0
 servers:
   - url: http://localhost:8080
