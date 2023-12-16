@@ -4,6 +4,7 @@
   - [One-Off / Initialize a Project](#one-off--initialize-a-project)
   - [Development Process](#development-process)
   - [Customization](#customization)
+  - [Validation](#validation)
   - [Todos](#todos)
 
 It's not a new concept, yet it has gained more popularity over the last few years due to an improvements in existing tooling.
@@ -33,7 +34,7 @@ Make the adjustments to those files you don't want to generate.
 Let's say a new business requirements arrive at the table. They need a new endpoint.
 
 1. Check out a new branch from the `main` upstream.
-2. Design the endpoint by adjusting the source of truth, the OAS (`cats_api.yaml`).
+2. Design the endpoint by adjusting the source of truth, the OAS (`pets_api.yaml`).
 3. Run `make generate`. Which will run the `openapi-generator-cli` for generating the `client` and `server`
 4. Fill in the todos and write the business logic / implementation.
 5. Create a Pull Request / Merge Request.
@@ -205,6 +206,13 @@ A variety of additional templates crafted by the open-source community are avail
 - wsdl-schema
 - xojo-client
 - zapier
+
+## Validation
+
+To validate the schema of he OAS, just run:
+```bash
+make openapi ARGS='validate -i pets_api.yaml' 
+```
 
 ## Todos
 

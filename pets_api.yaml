@@ -116,7 +116,7 @@ paths:
                   breed: Persian
                   age: 3
             schema:
-              $ref: '#/components/schemas/Cat'
+              $ref: '#/components/schemas/UpdatedCat'
       responses:
         '200':
           description: Cat updated successfully
