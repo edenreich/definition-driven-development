@@ -7,9 +7,9 @@ COPY go.mod .
 
 ENV CGO_ENABLED=0
 
-RUN go build -o openapi .
+RUN go build -o api .
 
 FROM scratch AS runtime
-COPY --from=build /go/src/openapi ./
+COPY --from=build /go/src/api ./
 EXPOSE 8080/tcp
-ENTRYPOINT ["./openapi"]
+ENTRYPOINT ["./api"]

@@ -13,16 +13,16 @@ import (
 	"log"
 	"net/http"
 
-	openapi "github.com/edenreich/definition-driven-development/go"
+	api "github.com/edenreich/definition-driven-development/go"
 )
 
 func main() {
 	log.Printf("Server started")
 
-	CatsAPIService := openapi.NewCatsAPIService()
-	CatsAPIController := openapi.NewCatsAPIController(CatsAPIService)
+	CatsAPIService := api.NewCatsAPIService()
+	CatsAPIController := api.NewCatsAPIController(CatsAPIService)
 
-	router := openapi.NewRouter(CatsAPIController)
+	router := api.NewRouter(CatsAPIController)
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

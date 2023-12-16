@@ -1,4 +1,4 @@
-# Go API Server for openapi
+# Go API Server for api
 
 A simple API to manage cats
 
@@ -13,7 +13,7 @@ To see how to make this your own, look here:
 [README](https://openapi-generator.tech)
 
 - API version: 1.0.0
-- Build date: 2023-12-16T17:04:12.317408178Z[Etc/UTC]
+- Build date: 2023-12-16T17:09:33.339328340Z[Etc/UTC]
 
 
 ### Running the server
@@ -25,10 +25,10 @@ go run main.go
 
 To run the server in a docker container
 ```
-docker build --network=host -t openapi .
+docker build --network=host -t api .
 ```
 
 Once image is built use
 ```
-docker run --rm -it openapi
+docker run --rm -it api
 ```
