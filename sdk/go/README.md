@@ -1,4 +1,4 @@
-# Go API client for openapi
+# Go API client for sdk
 
 A simple API to manage cats
 
@@ -21,7 +21,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import openapi "github.com/edenreich/definition-driven-development"
+import sdk "github.com/edenreich/definition-driven-development"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -36,18 +36,18 @@ Default configuration comes with `Servers` field that contains server objects as
 
 ### Select Server Configuration
 
-For using other server than the one defined on index 0 set context value `openapi.ContextServerIndex` of type `int`.
+For using other server than the one defined on index 0 set context value `sdk.ContextServerIndex` of type `int`.
 
 ```go
-ctx := context.WithValue(context.Background(), openapi.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), sdk.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
 
-Templated server URL is formatted using default variables from configuration or from context value `openapi.ContextServerVariables` of type `map[string]string`.
+Templated server URL is formatted using default variables from configuration or from context value `sdk.ContextServerVariables` of type `map[string]string`.
 
 ```go
-ctx := context.WithValue(context.Background(), openapi.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), sdk.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -58,13 +58,13 @@ Note, enum values are always validated and all unused variables are silently ign
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
 An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
-Similar rules for overriding default operation server index and variables applies by using `openapi.ContextOperationServerIndices` and `openapi.ContextOperationServerVariables` context maps.
+Similar rules for overriding default operation server index and variables applies by using `sdk.ContextOperationServerIndices` and `sdk.ContextOperationServerVariables` context maps.
 
 ```go
-ctx := context.WithValue(context.Background(), openapi.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), sdk.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), sdk.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},
