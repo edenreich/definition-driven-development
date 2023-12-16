@@ -3,9 +3,16 @@ info:
   title: Cat API
   description: A simple API to manage cats
   version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+  - url: https://api.example.com
+    description: Production server
 paths:
   /cats:
     get:
+      tags:
+        - Cats
       summary: Get a list of all cats
       responses:
         '200':
@@ -28,6 +35,8 @@ paths:
                       breed: Siamese
                       age: 4
     post:
+      tags:
+        - Cats
       summary: Create a new cat
       requestBody:
         required: true
@@ -56,6 +65,8 @@ paths:
                     age: 2
   /cats/{id}:
     get:
+      tags:
+        - Cats
       summary: Get information about a specific cat
       parameters:
         - name: id
@@ -79,6 +90,8 @@ paths:
         '404':
           description: Cat not found
     put:
+      tags:
+        - Cats
       summary: Update information about a specific cat
       parameters:
         - name: id
