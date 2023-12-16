@@ -1,0 +1,141 @@
+openapi: 3.0.2
+info:
+  description: A simple API to manage cats
+  title: Cat API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /cats:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Cats:
+                  value:
+                  - id: a3b58e17-0a89-4d84-a3d2-89c4bf4ebec3
+                    name: Fluffy
+                    breed: Persian
+                    age: 2
+                  - id: 8a5e1b27-c7f5-4d46-91b8-25bbce6d3a14
+                    name: Muffin
+                    breed: Siamese
+                    age: 4
+              schema:
+                items:
+                  $ref: '#/components/schemas/Cat'
+                type: array
+          description: Successful response
+      summary: Get a list of all cats
+    post:
+      requestBody:
+        content:
+          application/json:
+            examples:
+              CreatedCat:
+                value:
+                  id: a3b58e17-0a89-4d84-a3d2-89c4bf4ebec3
+                  name: Fluffy
+                  breed: Persian
+                  age: 2
+            schema:
+              $ref: '#/components/schemas/CreatedCat'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                CreatedCat:
+                  value:
+                    id: a3b58e17-0a89-4d84-a3d2-89c4bf4ebec3
+                    name: Fluffy
+                    breed: Persian
+                    age: 2
+          description: Cat created successfully
+      summary: Create a new cat
+  /cats/{id}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Cat:
+                  value:
+                    id: a3b58e17-0a89-4d84-a3d2-89c4bf4ebec3
+                    name: Fluffy
+                    breed: Persian
+                    age: 2
+          description: Successful response
+        "404":
+          description: Cat not found
+      summary: Get information about a specific cat
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              UpdatedCat:
+                value:
+                  id: a3b58e17-0a89-4d84-a3d2-89c4bf4ebec3
+                  name: Fluffy
+                  breed: Persian
+                  age: 3
+            schema:
+              $ref: '#/components/schemas/Cat'
+        required: true
+      responses:
+        "200":
+          description: Cat updated successfully
+      summary: Update information about a specific cat
+components:
+  schemas:
+    Cat:
+      example:
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        breed: breed
+        age: 0
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          type: string
+        breed:
+          type: string
+        age:
+          type: integer
+      required:
+      - age
+      - breed
+      - name
+      type: object
+    CreatedCat:
+      allOf:
+      - $ref: '#/components/schemas/Cat'
+    UpdatedCat:
+      allOf:
+      - $ref: '#/components/schemas/Cat'
