@@ -1,5 +1,6 @@
 
 OPENAPI_SPEC ?= cats_api.yaml
+OPENAPI_GENERATOR_IMAGE ?= openapitools/openapi-generator-cli
 GIT_REPOSITORY_ID ?= definition-driven-development
 GIT_USER_ID ?= edenreich
 
@@ -38,7 +39,7 @@ fetch-templates:
 generate-sdk-go:
 	@echo "Generating go SDK..."
 	@docker run --rm \
-		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
+		-v $(PWD):/local -w /local $(OPENAPI_GENERATOR_IMAGE) generate \
 		-i $(OPENAPI_SPEC) \
 		-g go \
 		-t templates/go \
@@ -50,7 +51,7 @@ generate-sdk-go:
 generate-api:
 	@echo "Generating go API..."
 	@docker run --rm \
-		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
+		-v $(PWD):/local -w /local $(OPENAPI_GENERATOR_IMAGE) generate \
 		-i $(OPENAPI_SPEC) \
 		-g go-server \
 		-t templates/go-server \
@@ -62,7 +63,7 @@ generate-api:
 generate-protobuf-schema:
 	@echo "Generating protobuf schema..."
 	@docker run --rm \
-		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
+		-v $(PWD):/local -w /local $(OPENAPI_GENERATOR_IMAGE) generate \
 		-i $(OPENAPI_SPEC) \
 		-g protobuf-schema \
 		-t templates/protobuf-schema \
@@ -76,7 +77,7 @@ regenerate-sdk-go:
 	@echo "Re-generating go SDK..."
 	@rm -rf sdk/go
 	@docker run --rm \
-		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
+		-v $(PWD):/local -w /local $(OPENAPI_GENERATOR_IMAGE) generate \
 		-i $(OPENAPI_SPEC) \
 		-g go \
 		-t templates/go \
@@ -89,7 +90,7 @@ regenerate-api:
 	@echo "Re-generating go API..."
 	@rm -rf api
 	@docker run --rm \
-		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
+		-v $(PWD):/local -w /local $(OPENAPI_GENERATOR_IMAGE) generate \
 		-i $(OPENAPI_SPEC) \
 		-g go-server \
 		-t templates/go-server \
@@ -102,7 +103,7 @@ regenerate-protobuf-schema:
 	@echo "Re-generating protobuf schema..."
 	@rm -rf protobuf
 	@docker run --rm \
-		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
+		-v $(PWD):/local -w /local $(OPENAPI_GENERATOR_IMAGE) generate \
 		-i $(OPENAPI_SPEC) \
 		-g protobuf-schema \
 		-t templates/protobuf-schema \
@@ -137,7 +138,7 @@ test-sdk-go:
 test: test-sdk-go test-api
 
 openapi:
-	@docker run --rm -v $(PWD):/local -w /local openapitools/openapi-generator-cli $(ARGS)
+	@docker run --rm -v $(PWD):/local -w /local $(OPENAPI_GENERATOR_IMAGE) $(ARGS)
 
 clean:
 	@rm -rf api
