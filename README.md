@@ -1,6 +1,6 @@
-# Definition-Driven Development
+# Definition-driven Development
 
-- [Definition-Driven Development](#definition-driven-development)
+- [Definition-driven Development](#definition-driven-development)
   - [One-Off / Initialize a Project](#one-off--initialize-a-project)
   - [Development Process](#development-process)
   - [Customization](#customization)
