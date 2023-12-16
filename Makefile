@@ -2,8 +2,8 @@
 help:
 	@echo "Usage: make [target]"
 	@echo "Targets:"
-	@echo "  generate-sdk-go     Generate go client"
-	@echo "  generate-api        Generate go server"
+	@echo "  generate-sdk-go     Generate go SDK"
+	@echo "  generate-api        Generate go API"
 	@echo "  tidy-sdk-go         Tidy go SDK"
 	@echo "  tidy-api            Tidy API"
 	@echo "  tidy                Tidy API and SDK's"
@@ -12,7 +12,7 @@ help:
 default: help
 
 generate-sdk-go:
-	@echo "Generating go client..."
+	@echo "Generating go SDK..."
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
@@ -23,7 +23,7 @@ generate-sdk-go:
 		-o sdk/go
 
 generate-api:
-	@echo "Generating go server..."
+	@echo "Generating go API..."
 	@docker run --rm \
 		-v $(PWD):/local -w /local openapitools/openapi-generator-cli generate \
 		-i cats_api.yaml \
@@ -37,20 +37,30 @@ generate-api:
 generate: generate-sdk-go generate-api
 
 tidy-sdk-go:
-	@echo "Tidying go client..."
+	@echo "Tidying go SDK..."
 	@cd sdk/go && go mod tidy
 
 tidy-api:
-	@echo "Tidying go server..."
+	@echo "Tidying go API..."
 	@cd api && go mod tidy
 
 tidy: tidy-sdk-go tidy-api
 
 run-api:
-	@echo "Running go server..."
+	@echo "Running go API..."
 	@cd api && go run main.go
+
+test-api:
+	@echo "Testing go API..."
+	@cd api && go test ./...
+
+test-sdk-go:
+	@echo "Testing go SDK..."
+	@cd sdk/go && go test ./...
+
+test: test-sdk-go test-api
 
 openapi:
 	@docker run --rm -v $(PWD):/local -w /local openapitools/openapi-generator-cli $(ARGS)
 
-.PHONY: generate-sdk-go generate-api generate tidy-sdk-go tidy-api tidy run-api openapi
+.PHONY: generate-sdk-go generate-api generate tidy-sdk-go tidy-api tidy run-api test-api test-sdk-go test openapi
