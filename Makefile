@@ -30,6 +30,7 @@ generate-api:
 		-t templates/go-server \
 		--git-repo-id definition-driven-development \
 		--git-user-id edenreich \
+		--package-name api \
 		-o api
 
 generate: generate-sdk-go generate-api
@@ -43,6 +44,10 @@ tidy-api:
 	@cd api && go mod tidy
 
 tidy: tidy-sdk-go tidy-api
+
+run-api:
+	@echo "Running go server..."
+	@cd api && go run main.go
 
 openapi:
 	@docker run --rm -v $(PWD):/local -w /local openapitools/openapi-generator-cli $(ARGS)
