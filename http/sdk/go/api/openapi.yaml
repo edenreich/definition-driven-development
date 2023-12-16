@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  description: A simple API to manage cats
-  title: Cat API
+  description: A simple API to manage pets
+  title: Pets API
   version: 1.0.0
 servers:
 - description: Local server

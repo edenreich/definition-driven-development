@@ -1,7 +1,7 @@
 /*
-Cat API
+Pets API
 
-A simple API to manage cats
+A simple API to manage pets
 
 API version: 1.0.0
 */
@@ -41,7 +41,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the Cat API API v1.0.0
+// APIClient manages communication with the Pets API API v1.0.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
