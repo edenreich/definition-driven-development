@@ -10,7 +10,7 @@
 
 syntax = "proto3";
 
-package sdk.services.catsservice;
+package openapitools.services.catsservice;
 
 import "google/protobuf/empty.proto";
 import public "models/cat.proto";
