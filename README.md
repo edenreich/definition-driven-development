@@ -18,6 +18,8 @@ Once the interface is well-defined, it's also possible to adjust specific requir
 
 Relying on OAS as the source of truth enables us to leverage the latest OAS version, specifically version 3.0.0 and beyond. As of the time of writing, when employing tools such as Swaggo, which generates OAS from Go code using annotations, there is a constraint limiting compatibility to OAS version 2.0.0. Furthermore, being independent of the annotations tied to a particular programming language enhances our flexibility, making us language-agnostic.
 
+This method is frequently referred to as the "Design-First" approach. By following this strategy, seamless collaboration among various stakeholders becomes easily achievable.
+
 ## One-Off / Initialize a Project
 
 All you need is an OpenAPI Specification (OAS). Once you have it well-defined, you can generate the first `client` and `server` projects in any desired programming language using `openapi-generator-cli`. If you're familiar with `Docker`, you can view the commands I placed in the Makefile; those container images already provide the `openapi-generator-cli` and the tooling needed for generating the code.
