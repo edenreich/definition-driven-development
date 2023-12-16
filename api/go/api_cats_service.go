@@ -26,20 +26,20 @@ func NewCatsAPIService() CatsAPIServicer {
 	return &CatsAPIService{}
 }
 
-// CatsGet - Get a list of all cats
-func (s *CatsAPIService) CatsGet(ctx context.Context) (ImplResponse, error) {
-	// TODO - update CatsGet with the required logic for this service method.
+// CreateCat - Create a new cat
+func (s *CatsAPIService) CreateCat(ctx context.Context, createdCat CreatedCat) (ImplResponse, error) {
+	// TODO - update CreateCat with the required logic for this service method.
 	// Add api_cats_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
-	// TODO: Uncomment the next line to return response Response(200, []Cat{}) or use other options such as http.Ok ...
-	// return Response(200, []Cat{}), nil
+	// TODO: Uncomment the next line to return response Response(201, {}) or use other options such as http.Ok ...
+	// return Response(201, nil),nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("CatsGet method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("CreateCat method not implemented")
 }
 
-// CatsIdGet - Get information about a specific cat
-func (s *CatsAPIService) CatsIdGet(ctx context.Context, id string) (ImplResponse, error) {
-	// TODO - update CatsIdGet with the required logic for this service method.
+// GetCat - Get information about a specific cat
+func (s *CatsAPIService) GetCat(ctx context.Context, id string) (ImplResponse, error) {
+	// TODO - update GetCat with the required logic for this service method.
 	// Add api_cats_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
@@ -48,27 +48,27 @@ func (s *CatsAPIService) CatsIdGet(ctx context.Context, id string) (ImplResponse
 	// TODO: Uncomment the next line to return response Response(404, {}) or use other options such as http.Ok ...
 	// return Response(404, nil),nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("CatsIdGet method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("GetCat method not implemented")
 }
 
-// CatsIdPut - Update information about a specific cat
-func (s *CatsAPIService) CatsIdPut(ctx context.Context, id string, cat Cat) (ImplResponse, error) {
-	// TODO - update CatsIdPut with the required logic for this service method.
+// GetCats - Get a list of all cats
+func (s *CatsAPIService) GetCats(ctx context.Context) (ImplResponse, error) {
+	// TODO - update GetCats with the required logic for this service method.
+	// Add api_cats_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []Cat{}) or use other options such as http.Ok ...
+	// return Response(200, []Cat{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("GetCats method not implemented")
+}
+
+// UpdateCat - Update information about a specific cat
+func (s *CatsAPIService) UpdateCat(ctx context.Context, id string, cat Cat) (ImplResponse, error) {
+	// TODO - update UpdateCat with the required logic for this service method.
 	// Add api_cats_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
 	// return Response(200, nil),nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("CatsIdPut method not implemented")
-}
-
-// CatsPost - Create a new cat
-func (s *CatsAPIService) CatsPost(ctx context.Context, createdCat CreatedCat) (ImplResponse, error) {
-	// TODO - update CatsPost with the required logic for this service method.
-	// Add api_cats_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(201, {}) or use other options such as http.Ok ...
-	// return Response(201, nil),nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("CatsPost method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("UpdateCat method not implemented")
 }

@@ -11,6 +11,7 @@ servers:
 paths:
   /cats:
     get:
+      operationId: getCats
       responses:
         "200":
           content:
@@ -35,6 +36,7 @@ paths:
       tags:
       - Cats
     post:
+      operationId: createCat
       requestBody:
         content:
           application/json:
@@ -65,6 +67,7 @@ paths:
       - Cats
   /cats/{id}:
     get:
+      operationId: getCat
       parameters:
       - explode: false
         in: path
@@ -92,6 +95,7 @@ paths:
       tags:
       - Cats
     put:
+      operationId: updateCat
       parameters:
       - explode: false
         in: path

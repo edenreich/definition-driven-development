@@ -23,23 +23,210 @@ import (
 // CatsAPIService CatsAPI service
 type CatsAPIService service
 
-type ApiCatsGetRequest struct {
+type ApiCreateCatRequest struct {
+	ctx context.Context
+	ApiService *CatsAPIService
+	createdCat *CreatedCat
+}
+
+func (r ApiCreateCatRequest) CreatedCat(createdCat CreatedCat) ApiCreateCatRequest {
+	r.createdCat = &createdCat
+	return r
+}
+
+func (r ApiCreateCatRequest) Execute() (*http.Response, error) {
+	return r.ApiService.CreateCatExecute(r)
+}
+
+/*
+CreateCat Create a new cat
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateCatRequest
+*/
+func (a *CatsAPIService) CreateCat(ctx context.Context) ApiCreateCatRequest {
+	return ApiCreateCatRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+func (a *CatsAPIService) CreateCatExecute(r ApiCreateCatRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatsAPIService.CreateCat")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cats"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createdCat == nil {
+		return nil, reportError("createdCat is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createdCat
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiGetCatRequest struct {
+	ctx context.Context
+	ApiService *CatsAPIService
+	id string
+}
+
+func (r ApiGetCatRequest) Execute() (*http.Response, error) {
+	return r.ApiService.GetCatExecute(r)
+}
+
+/*
+GetCat Get information about a specific cat
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiGetCatRequest
+*/
+func (a *CatsAPIService) GetCat(ctx context.Context, id string) ApiGetCatRequest {
+	return ApiGetCatRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+func (a *CatsAPIService) GetCatExecute(r ApiGetCatRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatsAPIService.GetCat")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cats/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiGetCatsRequest struct {
 	ctx context.Context
 	ApiService *CatsAPIService
 }
 
-func (r ApiCatsGetRequest) Execute() ([]Cat, *http.Response, error) {
-	return r.ApiService.CatsGetExecute(r)
+func (r ApiGetCatsRequest) Execute() ([]Cat, *http.Response, error) {
+	return r.ApiService.GetCatsExecute(r)
 }
 
 /*
-CatsGet Get a list of all cats
+GetCats Get a list of all cats
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCatsGetRequest
+ @return ApiGetCatsRequest
 */
-func (a *CatsAPIService) CatsGet(ctx context.Context) ApiCatsGetRequest {
-	return ApiCatsGetRequest{
+func (a *CatsAPIService) GetCats(ctx context.Context) ApiGetCatsRequest {
+	return ApiGetCatsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -47,7 +234,7 @@ func (a *CatsAPIService) CatsGet(ctx context.Context) ApiCatsGetRequest {
 
 // Execute executes the request
 //  @return []Cat
-func (a *CatsAPIService) CatsGetExecute(r ApiCatsGetRequest) ([]Cat, *http.Response, error) {
+func (a *CatsAPIService) GetCatsExecute(r ApiGetCatsRequest) ([]Cat, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -55,7 +242,7 @@ func (a *CatsAPIService) CatsGetExecute(r ApiCatsGetRequest) ([]Cat, *http.Respo
 		localVarReturnValue  []Cat
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatsAPIService.CatsGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatsAPIService.GetCats")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -120,121 +307,31 @@ func (a *CatsAPIService) CatsGetExecute(r ApiCatsGetRequest) ([]Cat, *http.Respo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCatsIdGetRequest struct {
-	ctx context.Context
-	ApiService *CatsAPIService
-	id string
-}
-
-func (r ApiCatsIdGetRequest) Execute() (*http.Response, error) {
-	return r.ApiService.CatsIdGetExecute(r)
-}
-
-/*
-CatsIdGet Get information about a specific cat
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiCatsIdGetRequest
-*/
-func (a *CatsAPIService) CatsIdGet(ctx context.Context, id string) ApiCatsIdGetRequest {
-	return ApiCatsIdGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-func (a *CatsAPIService) CatsIdGetExecute(r ApiCatsIdGetRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatsAPIService.CatsIdGet")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/cats/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiCatsIdPutRequest struct {
+type ApiUpdateCatRequest struct {
 	ctx context.Context
 	ApiService *CatsAPIService
 	id string
 	cat *Cat
 }
 
-func (r ApiCatsIdPutRequest) Cat(cat Cat) ApiCatsIdPutRequest {
+func (r ApiUpdateCatRequest) Cat(cat Cat) ApiUpdateCatRequest {
 	r.cat = &cat
 	return r
 }
 
-func (r ApiCatsIdPutRequest) Execute() (*http.Response, error) {
-	return r.ApiService.CatsIdPutExecute(r)
+func (r ApiUpdateCatRequest) Execute() (*http.Response, error) {
+	return r.ApiService.UpdateCatExecute(r)
 }
 
 /*
-CatsIdPut Update information about a specific cat
+UpdateCat Update information about a specific cat
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
- @return ApiCatsIdPutRequest
+ @return ApiUpdateCatRequest
 */
-func (a *CatsAPIService) CatsIdPut(ctx context.Context, id string) ApiCatsIdPutRequest {
-	return ApiCatsIdPutRequest{
+func (a *CatsAPIService) UpdateCat(ctx context.Context, id string) ApiUpdateCatRequest {
+	return ApiUpdateCatRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -242,14 +339,14 @@ func (a *CatsAPIService) CatsIdPut(ctx context.Context, id string) ApiCatsIdPutR
 }
 
 // Execute executes the request
-func (a *CatsAPIService) CatsIdPutExecute(r ApiCatsIdPutRequest) (*http.Response, error) {
+func (a *CatsAPIService) UpdateCatExecute(r ApiUpdateCatRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatsAPIService.CatsIdPut")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatsAPIService.UpdateCat")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -283,103 +380,6 @@ func (a *CatsAPIService) CatsIdPutExecute(r ApiCatsIdPutRequest) (*http.Response
 	}
 	// body params
 	localVarPostBody = r.cat
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-type ApiCatsPostRequest struct {
-	ctx context.Context
-	ApiService *CatsAPIService
-	createdCat *CreatedCat
-}
-
-func (r ApiCatsPostRequest) CreatedCat(createdCat CreatedCat) ApiCatsPostRequest {
-	r.createdCat = &createdCat
-	return r
-}
-
-func (r ApiCatsPostRequest) Execute() (*http.Response, error) {
-	return r.ApiService.CatsPostExecute(r)
-}
-
-/*
-CatsPost Create a new cat
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCatsPostRequest
-*/
-func (a *CatsAPIService) CatsPost(ctx context.Context) ApiCatsPostRequest {
-	return ApiCatsPostRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-func (a *CatsAPIService) CatsPostExecute(r ApiCatsPostRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatsAPIService.CatsPost")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/cats"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.createdCat == nil {
-		return nil, reportError("createdCat is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.createdCat
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err

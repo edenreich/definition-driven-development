@@ -77,10 +77,10 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CatsAPI* | [**CatsGet**](docs/CatsAPI.md#catsget) | **Get** /cats | Get a list of all cats
-*CatsAPI* | [**CatsIdGet**](docs/CatsAPI.md#catsidget) | **Get** /cats/{id} | Get information about a specific cat
-*CatsAPI* | [**CatsIdPut**](docs/CatsAPI.md#catsidput) | **Put** /cats/{id} | Update information about a specific cat
-*CatsAPI* | [**CatsPost**](docs/CatsAPI.md#catspost) | **Post** /cats | Create a new cat
+*CatsAPI* | [**CreateCat**](docs/CatsAPI.md#createcat) | **Post** /cats | Create a new cat
+*CatsAPI* | [**GetCat**](docs/CatsAPI.md#getcat) | **Get** /cats/{id} | Get information about a specific cat
+*CatsAPI* | [**GetCats**](docs/CatsAPI.md#getcats) | **Get** /cats | Get a list of all cats
+*CatsAPI* | [**UpdateCat**](docs/CatsAPI.md#updatecat) | **Put** /cats/{id} | Update information about a specific cat
 
 
 ## Documentation For Models

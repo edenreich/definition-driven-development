@@ -20,10 +20,10 @@ import (
 // The CatsAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a CatsAPIServicer to perform the required actions, then write the service results to the http response.
 type CatsAPIRouter interface { 
-	CatsGet(http.ResponseWriter, *http.Request)
-	CatsIdGet(http.ResponseWriter, *http.Request)
-	CatsIdPut(http.ResponseWriter, *http.Request)
-	CatsPost(http.ResponseWriter, *http.Request)
+	CreateCat(http.ResponseWriter, *http.Request)
+	GetCat(http.ResponseWriter, *http.Request)
+	GetCats(http.ResponseWriter, *http.Request)
+	UpdateCat(http.ResponseWriter, *http.Request)
 }
 
 
@@ -32,8 +32,8 @@ type CatsAPIRouter interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type CatsAPIServicer interface { 
-	CatsGet(context.Context) (ImplResponse, error)
-	CatsIdGet(context.Context, string) (ImplResponse, error)
-	CatsIdPut(context.Context, string, Cat) (ImplResponse, error)
-	CatsPost(context.Context, CreatedCat) (ImplResponse, error)
+	CreateCat(context.Context, CreatedCat) (ImplResponse, error)
+	GetCat(context.Context, string) (ImplResponse, error)
+	GetCats(context.Context) (ImplResponse, error)
+	UpdateCat(context.Context, string, Cat) (ImplResponse, error)
 }

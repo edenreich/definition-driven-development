@@ -4,18 +4,18 @@ All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CatsGet**](CatsAPI.md#CatsGet) | **Get** /cats | Get a list of all cats
-[**CatsIdGet**](CatsAPI.md#CatsIdGet) | **Get** /cats/{id} | Get information about a specific cat
-[**CatsIdPut**](CatsAPI.md#CatsIdPut) | **Put** /cats/{id} | Update information about a specific cat
-[**CatsPost**](CatsAPI.md#CatsPost) | **Post** /cats | Create a new cat
+[**CreateCat**](CatsAPI.md#CreateCat) | **Post** /cats | Create a new cat
+[**GetCat**](CatsAPI.md#GetCat) | **Get** /cats/{id} | Get information about a specific cat
+[**GetCats**](CatsAPI.md#GetCats) | **Get** /cats | Get a list of all cats
+[**UpdateCat**](CatsAPI.md#UpdateCat) | **Put** /cats/{id} | Update information about a specific cat
 
 
 
-## CatsGet
+## CreateCat
 
-> []Cat CatsGet(ctx).Execute()
+> CreateCat(ctx).CreatedCat(createdCat).Execute()
 
-Get a list of all cats
+Create a new cat
 
 ### Example
 
@@ -30,31 +30,34 @@ import (
 )
 
 func main() {
+	createdCat := *openapiclient.NewCreatedCat("Name_example", "Breed_example", int32(123)) // CreatedCat | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CatsAPI.CatsGet(context.Background()).Execute()
+	r, err := apiClient.CatsAPI.CreateCat(context.Background()).CreatedCat(createdCat).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.CatsGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.CreateCat``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CatsGet`: []Cat
-	fmt.Fprintf(os.Stdout, "Response from `CatsAPI.CatsGet`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCatsGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateCatRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createdCat** | [**CreatedCat**](CreatedCat.md) |  | 
 
 ### Return type
 
-[**[]Cat**](Cat.md)
+ (empty response body)
 
 ### Authorization
 
@@ -62,7 +65,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -70,9 +73,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## CatsIdGet
+## GetCat
 
-> CatsIdGet(ctx, id).Execute()
+> GetCat(ctx, id).Execute()
 
 Get information about a specific cat
 
@@ -93,9 +96,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.CatsAPI.CatsIdGet(context.Background(), id).Execute()
+	r, err := apiClient.CatsAPI.GetCat(context.Background(), id).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.CatsIdGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.GetCat``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -111,7 +114,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCatsIdGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetCatRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -136,9 +139,68 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## CatsIdPut
+## GetCats
 
-> CatsIdPut(ctx, id).Cat(cat).Execute()
+> []Cat GetCats(ctx).Execute()
+
+Get a list of all cats
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/edenreich/definition-driven-development"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CatsAPI.GetCats(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.GetCats``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCats`: []Cat
+	fmt.Fprintf(os.Stdout, "Response from `CatsAPI.GetCats`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCatsRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]Cat**](Cat.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateCat
+
+> UpdateCat(ctx, id).Cat(cat).Execute()
 
 Update information about a specific cat
 
@@ -160,9 +222,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.CatsAPI.CatsIdPut(context.Background(), id).Cat(cat).Execute()
+	r, err := apiClient.CatsAPI.UpdateCat(context.Background(), id).Cat(cat).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.CatsIdPut``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.UpdateCat``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -178,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCatsIdPutRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateCatRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -198,68 +260,6 @@ No authorization required
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CatsPost
-
-> CatsPost(ctx).CreatedCat(createdCat).Execute()
-
-Create a new cat
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/edenreich/definition-driven-development"
-)
-
-func main() {
-	createdCat := *openapiclient.NewCreatedCat("Name_example", "Breed_example", int32(123)) // CreatedCat | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.CatsAPI.CatsPost(context.Background()).CreatedCat(createdCat).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CatsAPI.CatsPost``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCatsPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createdCat** | [**CreatedCat**](CreatedCat.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
