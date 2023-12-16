@@ -8,20 +8,20 @@ help:
 	@echo "Usage: make [target]"
 	@echo "Targets:"
 	@echo "  fetch-templates               Fetching vendors generators templates"
-	@echo "  generate-http-sdk-go          Generate the HTTP go SDK"
-	@echo "  generate-http-api             Generate the HTTP go API"
+	@echo "  generate-http-sdk-go          Generate the go HTTP SDK"
+	@echo "  generate-http-api             Generate the go HTTP API"
 	@echo "  generate-protobuf-schema      Generate the protobuf schema"
 	@echo "  generate                      Generate the HTTP SDK's and API"
-	@echo "  regenerate-http-sdk-go        Re-generate the HTTP go SDK"
-	@echo "  regenerate-http-api           Re-generate the HTTP go API"
+	@echo "  regenerate-http-sdk-go        Re-generate the go HTTP SDK"
+	@echo "  regenerate-http-api           Re-generate the go HTTP API"
 	@echo "  regenerate-protobuf-schema    Re-generate the protobuf schema"
 	@echo "  regenerate                    Re-generate the HTTP SDK's and API"
-	@echo "  tidy-http-sdk-go              Tidy the HTTP go SDK"
-	@echo "  tidy-http-api                 Tidy the HTTP API"
-	@echo "  tidy                          Tidy the HTTP API and SDK's"
+	@echo "  tidy-http-sdk-go              Tidy the go HTTP SDK"
+	@echo "  tidy-http-api                 Tidy the go HTTP API"
+	@echo "  tidy                          Tidy the go HTTP API and SDK's"
 	@echo "  run-http-api                  Run the HTTP API"
 	@echo "  test-http-api                 Test the HTTP API"
-	@echo "  test-http-sdk-go              Test the HTTP go SDK"
+	@echo "  test-http-sdk-go              Test the go HTTP SDK"
 	@echo "  test                          Test the HTTP API and SDK's"
 	@echo "  openapi                       Run the openapi-generator-cli"
 	@echo "  clean                         Clean the SDK's, proto files and API"
@@ -128,11 +128,11 @@ run-http-api:
 	@cd http/api && go run main.go
 
 test-http-api:
-	@echo "Testing go API..."
+	@echo "Testing go HTTP API..."
 	@cd http/api && go test ./...
 
 test-http-sdk-go:
-	@echo "Testing go SDK..."
+	@echo "Testing go HTTP SDK..."
 	@cd http/sdk/go && go test ./...
 
 test: test-http-sdk-go test-http-api
