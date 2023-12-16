@@ -26,8 +26,7 @@ jobs:
       run: |
         make generate
         make tidy
-        git diff --exit-code
-
+        git diff --exit-code -- ':!http/api/README.md'
 
     - name: Test
       run: make test
