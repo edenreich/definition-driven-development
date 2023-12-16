@@ -4,7 +4,10 @@ info:
   title: Cat API
   version: 1.0.0
 servers:
-- url: /
+- description: Local server
+  url: http://localhost:8080
+- description: Production server
+  url: https://api.example.com
 paths:
   /cats:
     get:
@@ -29,6 +32,8 @@ paths:
                 type: array
           description: Successful response
       summary: Get a list of all cats
+      tags:
+      - Cats
     post:
       requestBody:
         content:
@@ -56,6 +61,8 @@ paths:
                     age: 2
           description: Cat created successfully
       summary: Create a new cat
+      tags:
+      - Cats
   /cats/{id}:
     get:
       parameters:
@@ -82,6 +89,8 @@ paths:
         "404":
           description: Cat not found
       summary: Get information about a specific cat
+      tags:
+      - Cats
     put:
       parameters:
       - explode: false
@@ -109,6 +118,8 @@ paths:
         "200":
           description: Cat updated successfully
       summary: Update information about a specific cat
+      tags:
+      - Cats
 components:
   schemas:
     Cat:

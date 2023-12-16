@@ -2,12 +2,12 @@
 .travis.yml
 README.md
 api/openapi.yaml
-api_default.go
+api_cats.go
 client.go
 configuration.go
 docs/Cat.md
+docs/CatsAPI.md
 docs/CreatedCat.md
-docs/DefaultAPI.md
 docs/UpdatedCat.md
 git_push.sh
 go.mod

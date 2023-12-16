@@ -73,14 +73,14 @@ ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVari
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultAPI* | [**CatsGet**](docs/DefaultAPI.md#catsget) | **Get** /cats | Get a list of all cats
-*DefaultAPI* | [**CatsIdGet**](docs/DefaultAPI.md#catsidget) | **Get** /cats/{id} | Get information about a specific cat
-*DefaultAPI* | [**CatsIdPut**](docs/DefaultAPI.md#catsidput) | **Put** /cats/{id} | Update information about a specific cat
-*DefaultAPI* | [**CatsPost**](docs/DefaultAPI.md#catspost) | **Post** /cats | Create a new cat
+*CatsAPI* | [**CatsGet**](docs/CatsAPI.md#catsget) | **Get** /cats | Get a list of all cats
+*CatsAPI* | [**CatsIdGet**](docs/CatsAPI.md#catsidget) | **Get** /cats/{id} | Get information about a specific cat
+*CatsAPI* | [**CatsIdPut**](docs/CatsAPI.md#catsidput) | **Put** /cats/{id} | Update information about a specific cat
+*CatsAPI* | [**CatsPost**](docs/CatsAPI.md#catspost) | **Post** /cats | Create a new cat
 
 
 ## Documentation For Models

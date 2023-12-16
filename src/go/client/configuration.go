@@ -90,8 +90,12 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "",
-				Description: "No description provided",
+				URL: "http://localhost:8080",
+				Description: "Local server",
+			},
+			{
+				URL: "https://api.example.com",
+				Description: "Production server",
 			},
 		},
 		OperationServers: map[string]ServerConfigurations{
