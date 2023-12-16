@@ -19,6 +19,7 @@ generate-sdk-go:
 		-g go \
 		--git-repo-id definition-driven-development \
 		--git-user-id edenreich \
+		--package-name sdk \
 		-o sdk/go
 
 generate-api:
