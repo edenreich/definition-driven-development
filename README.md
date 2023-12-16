@@ -208,6 +208,5 @@ A variety of additional templates crafted by the open-source community are avail
 
 ## Todos
 
-- [ ] search for OAS gRPC templates to generate the proto files
 - [ ] cover virtual services / mocked services
 - [ ] generate metrics based of customisations attributes in the OAS
