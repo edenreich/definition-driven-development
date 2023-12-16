@@ -53,4 +53,4 @@ run-api:
 openapi:
 	@docker run --rm -v $(PWD):/local -w /local openapitools/openapi-generator-cli $(ARGS)
 
-.PHONY: generate-sdk-go generate-api generate tidy-sdk-go tidy-api tidy openapi
+.PHONY: generate-sdk-go generate-api generate tidy-sdk-go tidy-api tidy run-api openapi
