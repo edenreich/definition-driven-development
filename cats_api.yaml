@@ -107,6 +107,10 @@ components:
   schemas:
     Cat:
       type: object
+      required:
+        - name
+        - breed
+        - age
       properties:
         id:
           type: string
