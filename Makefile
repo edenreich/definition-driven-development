@@ -5,6 +5,7 @@ GIT_USER_ID ?= edenreich
 help:
 	@echo "Usage: make [target]"
 	@echo "Targets:"
+	@echo "  fetch-templates               Fetching vendors generators templates"
 	@echo "  generate-sdk-go               Generate the go SDK"
 	@echo "  generate-api                  Generate the go API"
 	@echo "  generate-protobuf-schema      Generate the protobuf schema"
@@ -25,6 +26,13 @@ help:
 	@echo "  help                          Show this help message"
 
 default: help
+
+fetch-templates:
+	@echo "Fetching vendors generators templates..."
+	@mkdir -p templates
+	@make openapi ARGS='author template -g go -o templates/go'
+	@make openapi ARGS='author template -g go-server -o templates/go-server'
+	@make openapi ARGS='author template -g protobuf-schema -o templates/protobuf-schema'
 
 generate-sdk-go:
 	@echo "Generating go SDK..."
@@ -133,4 +141,4 @@ clean:
 	@rm -rf sdk
 	@rm -rf protobuf
 
-.PHONY: generate-sdk-go generate-api generate-protobuf-schema generate regenerate-sdk-go regenerate-api regenerate-protobuf-schema regenerate tidy-sdk-go tidy-api tidy run-api test-api test-sdk-go test openapi
+.PHONY: fetch-templates generate-sdk-go generate-api generate-protobuf-schema generate regenerate-sdk-go regenerate-api regenerate-protobuf-schema regenerate tidy-sdk-go tidy-api tidy run-api test-api test-sdk-go test openapi
