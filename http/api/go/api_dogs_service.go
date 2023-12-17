@@ -11,8 +11,6 @@ package api
 
 import (
 	"context"
-	"errors"
-	"net/http"
 )
 
 // DogsAPIService is a service that implements the logic for the DogsAPIServicer
@@ -32,7 +30,20 @@ func (s *DogsAPIService) GetDogs(ctx context.Context) (ImplResponse, error) {
 	// Add api_dogs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, []Dog{}) or use other options such as http.Ok ...
-	// return Response(200, []Dog{}), nil
+	return Response(200, []Dog{
+		{
+			Id:    "7448d5c9-4e3a-4500-a018-fc25763dd3a4",
+			Name:  "Fido",
+			Age:   3,
+			Breed: "Labrador",
+		},
+		{
+			Id:    "7448d5c9-4e3a-4500-a018-fc25763dd3a5",
+			Name:  "Sparky",
+			Age:   2,
+			Breed: "Labrador",
+		},
+	}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("GetDogs method not implemented")
+	// return Response(http.StatusNotImplemented, nil), errors.New("GetDogs method not implemented")
 }
