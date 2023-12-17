@@ -25,6 +25,12 @@ type CatsAPIRouter interface {
 	GetCats(http.ResponseWriter, *http.Request)
 	UpdateCat(http.ResponseWriter, *http.Request)
 }
+// DogsAPIRouter defines the required methods for binding the api requests to a responses for the DogsAPI
+// The DogsAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a DogsAPIServicer to perform the required actions, then write the service results to the http response.
+type DogsAPIRouter interface { 
+	GetDogs(http.ResponseWriter, *http.Request)
+}
 
 
 // CatsAPIServicer defines the api actions for the CatsAPI service
@@ -36,4 +42,13 @@ type CatsAPIServicer interface {
 	GetCat(context.Context, string) (ImplResponse, error)
 	GetCats(context.Context) (ImplResponse, error)
 	UpdateCat(context.Context, string, UpdatedCat) (ImplResponse, error)
+}
+
+
+// DogsAPIServicer defines the api actions for the DogsAPI service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type DogsAPIServicer interface { 
+	GetDogs(context.Context) (ImplResponse, error)
 }

@@ -1,5 +1,7 @@
 README.md
 models/cat.proto
 models/created_cat.proto
+models/dog.proto
 models/updated_cat.proto
 services/cats_service.proto
+services/dogs_service.proto

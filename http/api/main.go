@@ -22,7 +22,10 @@ func main() {
 	CatsAPIService := api.NewCatsAPIService()
 	CatsAPIController := api.NewCatsAPIController(CatsAPIService)
 
-	router := api.NewRouter(CatsAPIController)
+	DogsAPIService := api.NewDogsAPIService()
+	DogsAPIController := api.NewDogsAPIController(DogsAPIService)
+
+	router := api.NewRouter(CatsAPIController, DogsAPIController)
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
