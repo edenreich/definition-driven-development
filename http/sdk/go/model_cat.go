@@ -20,10 +20,10 @@ var _ MappedNullable = &Cat{}
 
 // Cat struct for Cat
 type Cat struct {
-	Id *string `json:"id,omitempty"`
-	Name string `json:"name"`
-	Breed string `json:"breed"`
-	Age int32 `json:"age"`
+	Id    *string `json:"id,omitempty"`
+	Name  string  `json:"name"`
+	Breed string  `json:"breed"`
+	Age   int32   `json:"age"`
 }
 
 type _Cat Cat
@@ -153,7 +153,7 @@ func (o *Cat) SetAge(v int32) {
 }
 
 func (o Cat) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -186,10 +186,10 @@ func (o *Cat) UnmarshalJSON(bytes []byte) (err error) {
 	err = json.Unmarshal(bytes, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -243,5 +243,3 @@ func (v *NullableCat) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

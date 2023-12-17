@@ -14,24 +14,21 @@ import (
 	"net/http"
 )
 
-
-
 // CatsAPIRouter defines the required methods for binding the api requests to a responses for the CatsAPI
 // The CatsAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a CatsAPIServicer to perform the required actions, then write the service results to the http response.
-type CatsAPIRouter interface { 
+type CatsAPIRouter interface {
 	CreateCat(http.ResponseWriter, *http.Request)
 	GetCat(http.ResponseWriter, *http.Request)
 	GetCats(http.ResponseWriter, *http.Request)
 	UpdateCat(http.ResponseWriter, *http.Request)
 }
 
-
 // CatsAPIServicer defines the api actions for the CatsAPI service
 // This interface intended to stay up to date with the openapi yaml used to generate it,
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
-type CatsAPIServicer interface { 
+type CatsAPIServicer interface {
 	CreateCat(context.Context, CreatedCat) (ImplResponse, error)
 	GetCat(context.Context, string) (ImplResponse, error)
 	GetCats(context.Context) (ImplResponse, error)

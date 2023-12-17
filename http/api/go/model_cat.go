@@ -9,11 +9,7 @@
 
 package api
 
-
-
-
 type Cat struct {
-
 	Id string `json:"id,omitempty"`
 
 	Name string `json:"name"`
@@ -26,9 +22,9 @@ type Cat struct {
 // AssertCatRequired checks if the required fields are not zero-ed
 func AssertCatRequired(obj Cat) error {
 	elements := map[string]interface{}{
-		"name": obj.Name,
+		"name":  obj.Name,
 		"breed": obj.Breed,
-		"age": obj.Age,
+		"age":   obj.Age,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

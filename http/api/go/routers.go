@@ -12,20 +12,21 @@ package api
 import (
 	"encoding/json"
 	"errors"
-	"time"
-	"github.com/gorilla/mux"
 	"io"
 	"mime/multipart"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
+	"time"
+
+	"github.com/gorilla/mux"
 )
 
 // A Route defines the parameters for an api endpoint
 type Route struct {
-	Method	  string
-	Pattern	 string
+	Method      string
+	Pattern     string
 	HandlerFunc http.HandlerFunc
 }
 
@@ -146,11 +147,11 @@ func readFileHeaderToTempFile(fileHeader *multipart.FileHeader) (*os.File, error
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return file, nil
 }
 
-func parseTimes(param string) ([]time.Time, error) {
+func parseTimes(param string) ([]time.Time, error) { //nolint: unused
 	splits := strings.Split(param, ",")
 	times := make([]time.Time, 0, len(splits))
 	for _, v := range splits {
@@ -164,7 +165,7 @@ func parseTimes(param string) ([]time.Time, error) {
 }
 
 // parseTime will parses a string parameter into a time.Time using the RFC3339 format
-func parseTime(param string) (time.Time, error) {
+func parseTime(param string) (time.Time, error) { //nolint: unused
 	if param == "" {
 		return time.Time{}, nil
 	}
@@ -178,7 +179,7 @@ type Number interface {
 type ParseString[T Number | string | bool] func(v string) (T, error)
 
 // parseFloat64 parses a string parameter to an float64.
-func parseFloat64(param string) (float64, error) {
+func parseFloat64(param string) (float64, error) { //nolint: unused
 	if param == "" {
 		return 0, nil
 	}
@@ -187,7 +188,7 @@ func parseFloat64(param string) (float64, error) {
 }
 
 // parseFloat32 parses a string parameter to an float32.
-func parseFloat32(param string) (float32, error) {
+func parseFloat32(param string) (float32, error) { //nolint: unused
 	if param == "" {
 		return 0, nil
 	}
@@ -197,7 +198,7 @@ func parseFloat32(param string) (float32, error) {
 }
 
 // parseInt64 parses a string parameter to an int64.
-func parseInt64(param string) (int64, error) {
+func parseInt64(param string) (int64, error) { //nolint: unused
 	if param == "" {
 		return 0, nil
 	}
@@ -206,7 +207,7 @@ func parseInt64(param string) (int64, error) {
 }
 
 // parseInt32 parses a string parameter to an int32.
-func parseInt32(param string) (int32, error) {
+func parseInt32(param string) (int32, error) { //nolint: unused
 	if param == "" {
 		return 0, nil
 	}
@@ -216,7 +217,7 @@ func parseInt32(param string) (int32, error) {
 }
 
 // parseBool parses a string parameter to an bool.
-func parseBool(param string) (bool, error) {
+func parseBool(param string) (bool, error) { //nolint: unused
 	if param == "" {
 		return false, nil
 	}
@@ -279,7 +280,7 @@ func WithMaximum[T Number](expected T) Constraint[T] {
 }
 
 // parseNumericParameter parses a numeric parameter to its respective type.
-func parseNumericParameter[T Number](param string, fn Operation[T], checks ...Constraint[T]) (T, error) {
+func parseNumericParameter[T Number](param string, fn Operation[T], checks ...Constraint[T]) (T, error) { //nolint: unused
 	v, ok, err := fn(param)
 	if err != nil {
 		return 0, err
@@ -297,13 +298,13 @@ func parseNumericParameter[T Number](param string, fn Operation[T], checks ...Co
 }
 
 // parseBoolParameter parses a string parameter to a bool
-func parseBoolParameter(param string, fn Operation[bool]) (bool, error) {
+func parseBoolParameter(param string, fn Operation[bool]) (bool, error) { //nolint: unused
 	v, _, err := fn(param)
 	return v, err
 }
 
 // parseNumericArrayParameter parses a string parameter containing array of values to its respective type.
-func parseNumericArrayParameter[T Number](param, delim string, required bool, fn Operation[T], checks ...Constraint[T]) ([]T, error) {
+func parseNumericArrayParameter[T Number](param, delim string, required bool, fn Operation[T], checks ...Constraint[T]) ([]T, error) { //nolint: unused
 	if param == "" {
 		if required {
 			return nil, errors.New(errMsgRequiredMissing)
