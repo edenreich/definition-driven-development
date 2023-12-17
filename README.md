@@ -209,7 +209,7 @@ A variety of additional templates crafted by the open-source community are avail
 
 ## Validation
 
-To validate the schema of he OAS, just run:
+To validate the schema of the OAS, just run:
 ```bash
 make openapi ARGS='validate -i pets_api.yaml'
 ```
