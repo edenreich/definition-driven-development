@@ -11,10 +11,12 @@ help:
 	@echo "  generate-http-sdk-go          Generate the go HTTP SDK"
 	@echo "  generate-http-api             Generate the go HTTP API"
 	@echo "  generate-protobuf-schema      Generate the protobuf schema"
+	@echo "  generate-grpc-go              Generate the go gRPC"
 	@echo "  generate                      Generate the HTTP SDK's and API"
 	@echo "  regenerate-http-sdk-go        Re-generate the go HTTP SDK"
 	@echo "  regenerate-http-api           Re-generate the go HTTP API"
 	@echo "  regenerate-protobuf-schema    Re-generate the protobuf schema"
+	@echo "  regenerate-grpc-go            Re-generate the go gRPC"
 	@echo "  regenerate                    Re-generate the HTTP SDK's and API"
 	@echo "  tidy-http-sdk-go              Tidy the go HTTP SDK"
 	@echo "  tidy-http-api                 Tidy the go HTTP API"
@@ -69,9 +71,20 @@ generate-protobuf-schema:
 		-t templates/protobuf-schema \
 		--git-repo-id $(GIT_REPOSITORY_ID) \
 		--git-user-id $(GIT_USER_ID) \
+		--package-name grpc \
+		--additional-properties=sourceFolder=grpc \
 		-o grpc/protobuf
 
-generate: generate-http-sdk-go generate-http-api generate-protobuf-schema
+generate-grpc-go:
+	@echo "Generating go gRPC..."
+	@mkdir -p grpc/go
+	@docker run --rm \
+		-v $(PWD)/grpc:/grpc -w /grpc/protobuf golang:1.21 \
+		bash -c 'apt update && apt install -y protobuf-compiler && go install github.com/golang/protobuf/protoc-gen-go@latest && \
+			protoc --go_out=../go models/*.proto && \
+			protoc --go_out=../go services/*.proto'
+
+generate: generate-http-sdk-go generate-http-api generate-protobuf-schema generate-grpc-go
 
 regenerate-http-sdk-go:
 	@echo "Re-generating go HTTP SDK..."
@@ -111,7 +124,17 @@ regenerate-protobuf-schema:
 		--git-user-id $(GIT_USER_ID) \
 		-o grpc/protobuf
 
-regenerate: regenerate-http-sdk-go regenerate-http-api regenerate-protobuf-schema
+regenerate-grpc-go:
+	@echo "Re-generating go gRPC..."
+	@rm -rf grpc/go
+	@mkdir -p grpc/go
+	@docker run --rm \
+		-v $(PWD)/grpc:/grpc -w /grpc/protobuf golang:1.21 \
+		bash -c 'apt update && apt install -y protobuf-compiler && go install github.com/golang/protobuf/protoc-gen-go@latest && \
+			protoc --go_out=../go models/*.proto && \
+			protoc --go_out=../go services/*.proto'
+
+regenerate: regenerate-http-sdk-go regenerate-http-api regenerate-protobuf-schema regenerate-grpc-go
 
 tidy-http-sdk-go:
 	@echo "Tidying go HTTP SDK..."
@@ -145,4 +168,4 @@ clean:
 	@rm -rf http
 	@rm -rf templates
 
-.PHONY: fetch-templates generate-http-sdk-go generate-http-api generate-protobuf-schema generate regenerate-http-sdk-go regenerate-http-api regenerate-protobuf-schema regenerate tidy-http-sdk-go tidy-http-api tidy run-http-api test-http-api test-http-sdk-go test openapi
+.PHONY: fetch-templates generate-http-sdk-go generate-http-api generate-protobuf-schema generate-grpc-go generate regenerate-http-sdk-go regenerate-http-api regenerate-protobuf-schema regenerate-grpc-go regenerate tidy-http-sdk-go tidy-http-api tidy run-http-api test-http-api test-http-sdk-go test openapi
