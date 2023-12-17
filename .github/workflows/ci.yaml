@@ -25,7 +25,6 @@ jobs:
     - name: Validate Dirty Workspace
       run: |
         make generate
-        make tidy
         git diff --exit-code -- ':!http/api/README.md'
 
     - name: Test

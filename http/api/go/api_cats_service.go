@@ -11,8 +11,8 @@ package api
 
 import (
 	"context"
-	"net/http"
 	"errors"
+	"net/http"
 )
 
 // CatsAPIService is a service that implements the logic for the CatsAPIServicer
