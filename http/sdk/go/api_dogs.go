@@ -18,12 +18,11 @@ import (
 	"net/url"
 )
 
-
 // DogsAPIService DogsAPI service
 type DogsAPIService service
 
 type ApiGetDogsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DogsAPIService
 }
 
@@ -34,24 +33,25 @@ func (r ApiGetDogsRequest) Execute() ([]Dog, *http.Response, error) {
 /*
 GetDogs Get a list of all dogs
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetDogsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetDogsRequest
 */
 func (a *DogsAPIService) GetDogs(ctx context.Context) ApiGetDogsRequest {
 	return ApiGetDogsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []Dog
+//
+//	@return []Dog
 func (a *DogsAPIService) GetDogsExecute(r ApiGetDogsRequest) ([]Dog, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Dog
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Dog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DogsAPIService.GetDogs")

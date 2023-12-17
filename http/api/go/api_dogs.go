@@ -10,16 +10,13 @@
 package api
 
 import (
-	"encoding/json"
 	"net/http"
 	"strings"
-
-	"github.com/gorilla/mux"
 )
 
 // DogsAPIController binds http requests to an api service and writes the service results to the http response
 type DogsAPIController struct {
-	service DogsAPIServicer
+	service      DogsAPIServicer
 	errorHandler ErrorHandler
 }
 
@@ -67,5 +64,5 @@ func (c *DogsAPIController) GetDogs(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
+	EncodeJSONResponse(result.Body, &result.Code, w) //nolint: errcheck
 }
