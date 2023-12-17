@@ -6,7 +6,6 @@ go/api.go
 go/api_cats.go
 go/api_cats_service.go
 go/api_dogs.go
-go/api_dogs_service.go
 go/error.go
 go/helpers.go
 go/impl.go
