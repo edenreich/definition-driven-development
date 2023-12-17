@@ -1,6 +1,6 @@
 http/api/**/* linguist-generated=true
 http/sdk/go/**/* linguist-generated=true
-grpc/protobuff/**/* linguist-generated=true
+grpc/protobuf/**/* linguist-generated=true
 grpc/models/**/* linguist-vendored=true
 grpc/services/**/* linguist-vendored=true
 
