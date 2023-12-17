@@ -37,9 +37,10 @@ Let's say a new business requirements arrive at the table. They need a new endpo
 2. Design the endpoint by adjusting the source of truth, the OAS (`pets_api.yaml`).
 3. Run `make generate`. Which will run the `openapi-generator-cli` for generating the `client` and `server`
 4. Fill in the todos and write the business logic / implementation.
-5. Create a Pull Request / Merge Request.
-6. Let your co-worker review.
-7. Once approved, merge it in.
+5. Add the file where you wrote the implementation to the generator ignore file, so it will know not to regenerate it from the template.
+6. Create a Pull Request / Merge Request.
+7. Let your co-worker review.
+8. Once approved, merge it in.
 
 Let's say those who work on the `client` are on a different team than those who work on the `server`. In that scenario, you can still generate the code for the `client` even on a completely separate repository, but the interface (the `OpenAPI Specification`) has to be with the same version. This way, teams can first design the specification and then work in parallel.
 
