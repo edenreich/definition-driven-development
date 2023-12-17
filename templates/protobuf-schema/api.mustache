@@ -2,6 +2,7 @@
 syntax = "proto3";
 
 package {{#lambda.lowercase}}{{{packageName}}}.{{{apiPackage}}}.{{{classname}}};{{/lambda.lowercase}}
+option go_package = "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}/{{sourceFolder}};{{{packageName}}}";
 
 import "google/protobuf/empty.proto";
 {{#imports}}

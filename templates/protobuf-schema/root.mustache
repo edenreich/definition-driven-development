@@ -2,6 +2,7 @@
 syntax = "proto3";
 
 package {{{packageName}}};
+option go_package = "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}/{{sourceFolder}};{{{packageName}}}";
 
 {{#vendorExtensions.x-grpc-options}}
 option {{{.}}};
