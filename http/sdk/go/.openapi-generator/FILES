@@ -20,5 +20,4 @@ model_created_cat.go
 model_dog.go
 model_updated_cat.go
 response.go
-test/api_dogs_test.go
 utils.go
