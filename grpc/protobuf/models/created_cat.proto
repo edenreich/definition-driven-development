@@ -10,7 +10,8 @@
 
 syntax = "proto3";
 
-package openapitools;
+package grpc;
+option go_package = "github.com/edenreich/definition-driven-development/grpc;grpc";
 
 
 message CreatedCat {

@@ -10,7 +10,8 @@
 
 syntax = "proto3";
 
-package openapitools.services.catsservice;
+package grpc.services.catsservice;
+option go_package = "github.com/edenreich/definition-driven-development/grpc;grpc";
 
 import "google/protobuf/empty.proto";
 import public "models/cat.proto";
