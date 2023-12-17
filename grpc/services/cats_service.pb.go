@@ -16,6 +16,10 @@
 package grpc
 
 import (
+	context "context"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -400,4 +404,192 @@ func file_services_cats_service_proto_init() {
 	file_services_cats_service_proto_rawDesc = nil
 	file_services_cats_service_proto_goTypes = nil
 	file_services_cats_service_proto_depIdxs = nil
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConnInterface
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion6
+
+// CatsServiceClient is the client API for CatsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type CatsServiceClient interface {
+	CreateCat(ctx context.Context, in *CreateCatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetCat(ctx context.Context, in *GetCatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetCats(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCatsResponse, error)
+	UpdateCat(ctx context.Context, in *UpdateCatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+}
+
+type catsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCatsServiceClient(cc grpc.ClientConnInterface) CatsServiceClient {
+	return &catsServiceClient{cc}
+}
+
+func (c *catsServiceClient) CreateCat(ctx context.Context, in *CreateCatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/grpc.services.catsservice.CatsService/CreateCat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *catsServiceClient) GetCat(ctx context.Context, in *GetCatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/grpc.services.catsservice.CatsService/GetCat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *catsServiceClient) GetCats(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetCatsResponse, error) {
+	out := new(GetCatsResponse)
+	err := c.cc.Invoke(ctx, "/grpc.services.catsservice.CatsService/GetCats", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *catsServiceClient) UpdateCat(ctx context.Context, in *UpdateCatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/grpc.services.catsservice.CatsService/UpdateCat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CatsServiceServer is the server API for CatsService service.
+type CatsServiceServer interface {
+	CreateCat(context.Context, *CreateCatRequest) (*emptypb.Empty, error)
+	GetCat(context.Context, *GetCatRequest) (*emptypb.Empty, error)
+	GetCats(context.Context, *emptypb.Empty) (*GetCatsResponse, error)
+	UpdateCat(context.Context, *UpdateCatRequest) (*emptypb.Empty, error)
+}
+
+// UnimplementedCatsServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedCatsServiceServer struct {
+}
+
+func (*UnimplementedCatsServiceServer) CreateCat(context.Context, *CreateCatRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCat not implemented")
+}
+func (*UnimplementedCatsServiceServer) GetCat(context.Context, *GetCatRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCat not implemented")
+}
+func (*UnimplementedCatsServiceServer) GetCats(context.Context, *emptypb.Empty) (*GetCatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCats not implemented")
+}
+func (*UnimplementedCatsServiceServer) UpdateCat(context.Context, *UpdateCatRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCat not implemented")
+}
+
+func RegisterCatsServiceServer(s *grpc.Server, srv CatsServiceServer) {
+	s.RegisterService(&_CatsService_serviceDesc, srv)
+}
+
+func _CatsService_CreateCat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CatsServiceServer).CreateCat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.services.catsservice.CatsService/CreateCat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CatsServiceServer).CreateCat(ctx, req.(*CreateCatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CatsService_GetCat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CatsServiceServer).GetCat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.services.catsservice.CatsService/GetCat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CatsServiceServer).GetCat(ctx, req.(*GetCatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CatsService_GetCats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CatsServiceServer).GetCats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.services.catsservice.CatsService/GetCats",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CatsServiceServer).GetCats(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CatsService_UpdateCat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CatsServiceServer).UpdateCat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.services.catsservice.CatsService/UpdateCat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CatsServiceServer).UpdateCat(ctx, req.(*UpdateCatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _CatsService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "grpc.services.catsservice.CatsService",
+	HandlerType: (*CatsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateCat",
+			Handler:    _CatsService_CreateCat_Handler,
+		},
+		{
+			MethodName: "GetCat",
+			Handler:    _CatsService_GetCat_Handler,
+		},
+		{
+			MethodName: "GetCats",
+			Handler:    _CatsService_GetCats_Handler,
+		},
+		{
+			MethodName: "UpdateCat",
+			Handler:    _CatsService_UpdateCat_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "services/cats_service.proto",
 }

@@ -75,14 +75,13 @@ generate-protobuf-schema:
 		--additional-properties=sourceFolder=grpc \
 		-o grpc/protobuf
 
-generate-grpc-go:
+generate-grpc-go: generate-protobuf-schema
 	@echo "Generating go gRPC..."
-	@mkdir -p grpc/go
 	@docker run --rm \
 		-v $(PWD)/grpc:/grpc -w /grpc/protobuf golang:1.21 \
 		bash -c 'apt update && apt install -y protobuf-compiler && go install github.com/golang/protobuf/protoc-gen-go@latest && \
-			protoc --go_out=../go models/*.proto && \
-			protoc --go_out=../go services/*.proto'
+			protoc --go_out=plugins=grpc,paths=source_relative:../ models/*.proto && \
+			protoc --go_out=plugins=grpc,paths=source_relative:../ services/*.proto'
 
 generate: generate-http-sdk-go generate-http-api generate-protobuf-schema generate-grpc-go
 
@@ -124,15 +123,15 @@ regenerate-protobuf-schema:
 		--git-user-id $(GIT_USER_ID) \
 		-o grpc/protobuf
 
-regenerate-grpc-go:
+regenerate-grpc-go: generate-protobuf-schema
 	@echo "Re-generating go gRPC..."
-	@rm -rf grpc/go
-	@mkdir -p grpc/go
+	@rm -rf grpc
+	@mkdir -p grpc
 	@docker run --rm \
 		-v $(PWD)/grpc:/grpc -w /grpc/protobuf golang:1.21 \
 		bash -c 'apt update && apt install -y protobuf-compiler && go install github.com/golang/protobuf/protoc-gen-go@latest && \
-			protoc --go_out=../go models/*.proto && \
-			protoc --go_out=../go services/*.proto'
+			protoc --go_out=plugins=grpc,paths=source_relative:../ models/*.proto && \
+			protoc --go_out=plugins=grpc,paths=source_relative:../ services/*.proto'
 
 regenerate: regenerate-http-sdk-go regenerate-http-api regenerate-protobuf-schema regenerate-grpc-go
 
