@@ -1,0 +1,3 @@
+http/api/**/* linguist-generated=true
+!http/api/go/api_*_service.go linguist-generated=true
+!http/api/main.go linguist-generated=true
