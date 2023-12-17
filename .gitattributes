@@ -1,3 +1,8 @@
 http/api/**/* linguist-generated=true
-!http/api/go/api_*_service.go linguist-generated=true
-!http/api/main.go linguist-generated=true
+http/sdk/go/**/* linguist-generated=true
+grpc/protobuff/**/* linguist-generated=true
+grpc/models/**/* linguist-vendored=true
+grpc/services/**/* linguist-vendored=true
+
+http/api/go/api_*_service.go linguist-generated=false
+http/api/main.go linguist-generated=false
