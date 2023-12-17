@@ -5,11 +5,13 @@ metadata:
   labels:
     {{- include "..labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: ClusterIP
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+  {{- range $index, $element := .Values.services }}
+    - name: {{ $element.name }}
+      port: {{ $element.port }}
+      targetPort: {{ $element.targetPort }}
       protocol: TCP
-      name: http
+  {{- end }}
   selector:
     {{- include "..selectorLabels" . | nindent 4 }}

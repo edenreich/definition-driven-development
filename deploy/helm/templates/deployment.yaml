@@ -19,9 +19,9 @@ spec:
       {{- end }}
       labels:
         {{- include "..labels" . | nindent 8 }}
-	{{- with .Values.podLabels }}
+	    {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
-        {{- end }}
+      {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -31,29 +31,32 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+      {{- range .Values.containers }}
+        - name: {{ .name }}
+          image: "{{- .repository }}:{{ .tag }}"
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- toYaml $.Values.securityContext | nindent 12 }}
+          imagePullPolicy: {{ .pullPolicy }}
           ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
+          {{- with .ports -}}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- $port := index .ports 0 }}
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /healthcheck
+              port: {{ $port.containerPort | int }}
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /healthcheck
+              port: {{ $port.containerPort | int }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
+            {{- toYaml $.Values.resources | nindent 12 }}
+          {{- with $.Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+      {{- end }}
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

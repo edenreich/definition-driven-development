@@ -4,11 +4,23 @@
 
 replicaCount: 1
 
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+containers:
+  - name: pets-api-http
+    repository: ghcr.io/edenreich/definition-driven-development/pets-api-http
+    pullPolicy: IfNotPresent
+    tag: "1.0.0"
+    ports:
+      - name: http
+        containerPort: 8080
+        protocol: TCP
+  - name: pets-api-grpc
+    repository: ghcr.io/edenreich/definition-driven-development/pets-api-grpc
+    pullPolicy: IfNotPresent
+    tag: "1.0.0"
+    ports:
+      - name: grpc
+        containerPort: 50051
+        protocol: TCP
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,9 +51,11 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: ClusterIP
-  port: 80
+services:
+  - name: http
+    port: 8080
+  - name: grpc
+    port: 50051
 
 ingress:
   enabled: false
@@ -59,17 +73,17 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
 
 autoscaling:
   enabled: false
