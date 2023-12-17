@@ -6,3 +6,5 @@ grpc/services/**/* linguist-vendored=true
 
 http/api/go/api_*_service.go linguist-generated=false
 http/api/main.go linguist-generated=false
+grpc/services/*_service.pb.go linguist-generated=false
+http/sdk/go/test/* linguist-generated=false
