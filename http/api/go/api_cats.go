@@ -19,7 +19,7 @@ import (
 
 // CatsAPIController binds http requests to an api service and writes the service results to the http response
 type CatsAPIController struct {
-	service CatsAPIServicer
+	service      CatsAPIServicer
 	errorHandler ErrorHandler
 }
 
@@ -97,7 +97,7 @@ func (c *CatsAPIController) CreateCat(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
+	EncodeJSONResponse(result.Body, &result.Code, w) //nolint: errcheck
 }
 
 // GetCat - Get information about a specific cat
@@ -115,7 +115,7 @@ func (c *CatsAPIController) GetCat(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
+	EncodeJSONResponse(result.Body, &result.Code, w) //nolint: errcheck
 }
 
 // GetCats - Get a list of all cats
@@ -127,7 +127,7 @@ func (c *CatsAPIController) GetCats(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
+	EncodeJSONResponse(result.Body, &result.Code, w) //nolint: errcheck
 }
 
 // UpdateCat - Update information about a specific cat
@@ -160,5 +160,5 @@ func (c *CatsAPIController) UpdateCat(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
+	EncodeJSONResponse(result.Body, &result.Code, w) //nolint: errcheck
 }

@@ -11,10 +11,11 @@ package sdk
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/edenreich/definition-driven-development"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/edenreich/definition-driven-development"
 )
 
 func Test_sdk_CatsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_sdk_CatsAPIService(t *testing.T) {
 
 	t.Run("Test CatsAPIService CreateCat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.CatsAPI.CreateCat(context.Background()).Execute()
 
@@ -35,7 +36,7 @@ func Test_sdk_CatsAPIService(t *testing.T) {
 
 	t.Run("Test CatsAPIService GetCat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 
@@ -48,7 +49,7 @@ func Test_sdk_CatsAPIService(t *testing.T) {
 
 	t.Run("Test CatsAPIService GetCats", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.CatsAPI.GetCats(context.Background()).Execute()
 
@@ -60,7 +61,7 @@ func Test_sdk_CatsAPIService(t *testing.T) {
 
 	t.Run("Test CatsAPIService UpdateCat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 

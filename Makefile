@@ -49,6 +49,14 @@ generate-http-sdk-go:
 		--git-user-id $(GIT_USER_ID) \
 		--package-name sdk \
 		-o http/sdk/go
+	@echo "Running go fmt..."
+	@cd http/sdk/go && go fmt ./...
+	@echo "Running go mod tidy..."
+	@cd http/sdk/go && go mod tidy
+	@echo "Remove unused imports..."
+	@docker run --rm -v $(PWD)/http/sdk/go:/app -w /app golang:1.21 bash -c 'go install golang.org/x/tools/cmd/goimports@latest && goimports -w .'
+	@echo "Running golangci-lint fix..."
+	@docker run --rm -v $(PWD)/http/sdk/go:/app -w /app golangci/golangci-lint:v1.55.2 golangci-lint run -v --fix
 
 generate-http-api:
 	@echo "Generating go HTTP API..."
@@ -61,6 +69,14 @@ generate-http-api:
 		--git-user-id $(GIT_USER_ID) \
 		--package-name api \
 		-o http/api
+	@echo "Running go fmt..."
+	@cd http/api && go fmt ./...
+	@echo "Running go mod tidy..."
+	@cd http/api && go mod tidy
+	@echo "Remove unused imports..."
+	@docker run --rm -v $(PWD)/http/api:/app -w /app golang:1.21 bash -c 'go install golang.org/x/tools/cmd/goimports@latest && goimports -w .'
+	@echo "Running golangci-lint fix..."
+	@docker run --rm -v $(PWD)/http/api:/app -w /app golangci/golangci-lint:v1.55.2 golangci-lint run -v --fix
 
 generate-protobuf-schema:
 	@echo "Generating protobuf schema..."
@@ -97,6 +113,14 @@ regenerate-http-sdk-go:
 		--git-user-id $(GIT_USER_ID) \
 		--package-name sdk \
 		-o http/sdk/go
+	@echo "Running go fmt..."
+	@cd http/sdk/go && go fmt ./...
+	@echo "Running go mod tidy..."
+	@cd http/sdk/go && go mod tidy
+	@echo "Remove unused imports..."
+	@docker run --rm -v $(PWD)/http/sdk/go:/app -w /app golang:1.21 bash -c 'go install golang.org/x/tools/cmd/goimports@latest && goimports -w .'
+	@echo "Running golangci-lint fix..."
+	@docker run --rm -v $(PWD)/http/sdk/go:/app -w /app golangci/golangci-lint:v1.55.2 golangci-lint run -v --fix
 
 regenerate-http-api:
 	@echo "Re-generating go API..."
@@ -110,6 +134,14 @@ regenerate-http-api:
 		--git-user-id $(GIT_USER_ID) \
 		--package-name api \
 		-o http/api
+	@echo "Running go fmt..."
+	@cd http/api && go fmt ./...
+	@echo "Running go mod tidy..."
+	@cd http/api && go mod tidy
+	@echo "Remove unused imports..."
+	@docker run --rm -v $(PWD)/http/api:/app -w /app golang:1.21 bash -c 'go install golang.org/x/tools/cmd/goimports@latest && goimports -w .'
+	@echo "Running golangci-lint fix..."
+	@docker run --rm -v $(PWD)/http/api:/app -w /app golangci/golangci-lint:v1.55.2 golangci-lint run -v --fix
 
 regenerate-protobuf-schema:
 	@echo "Re-generating protobuf schema..."
