@@ -7,10 +7,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  {{- range $index, $element := .Values.services }}
-    - name: {{ $element.name }}
-      port: {{ $element.port }}
-      targetPort: {{ $element.targetPort }}
+  {{- range .Values.services }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      targetPort: {{ .targetPort }}
       protocol: TCP
   {{- end }}
   selector:
