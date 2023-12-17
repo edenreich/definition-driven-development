@@ -29,3 +29,9 @@ jobs:
 
     - name: Test
       run: make test
+
+    # - name: Package HTTP API
+    #   run: make package-http-api
+
+    # - name: Package gRPC API
+    #   run: make package-grpc-api
