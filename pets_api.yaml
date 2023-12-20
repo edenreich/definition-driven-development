@@ -120,6 +120,32 @@ paths:
       responses:
         '200':
           description: Cat updated successfully
+  /dogs:
+    get:
+      tags:
+        - Dogs
+      operationId: getDogs
+      summary: Get a list of all dogs
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dog'
+              examples:
+                Dogs:
+                  value:
+                    - id: "a3b58e17-0a89-4d84-a3d2-43c4bf4ebec3"
+                      name: Spike
+                      breed: Bulldog
+                      age: 2
+                    - id: "6a5e1b27-c7f5-4d46-91b8-25bbce6d3a14"
+                      name: Rex
+                      breed: German Shepherd
+                      age: 4
 components:
   schemas:
     Cat:
@@ -145,3 +171,20 @@ components:
     UpdatedCat:
       allOf:
         - $ref: '#/components/schemas/Cat'
+    Dog:
+      type: object
+      required:
+        - name
+        - breed
+        - age
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        breed:
+          type: string
+        age:
+          type: integer

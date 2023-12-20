@@ -124,6 +124,32 @@ paths:
       summary: Update information about a specific cat
       tags:
       - Cats
+  /dogs:
+    get:
+      operationId: getDogs
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Dogs:
+                  value:
+                  - id: a3b58e17-0a89-4d84-a3d2-43c4bf4ebec3
+                    name: Spike
+                    breed: Bulldog
+                    age: 2
+                  - id: 6a5e1b27-c7f5-4d46-91b8-25bbce6d3a14
+                    name: Rex
+                    breed: German Shepherd
+                    age: 4
+              schema:
+                items:
+                  $ref: '#/components/schemas/Dog'
+                type: array
+          description: Successful response
+      summary: Get a list of all dogs
+      tags:
+      - Dogs
 components:
   schemas:
     Cat:
@@ -154,3 +180,25 @@ components:
     UpdatedCat:
       allOf:
       - $ref: '#/components/schemas/Cat'
+    Dog:
+      example:
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        breed: breed
+        age: 0
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          type: string
+        breed:
+          type: string
+        age:
+          type: integer
+      required:
+      - age
+      - breed
+      - name
+      type: object

@@ -81,12 +81,14 @@ Class | Method | HTTP request | Description
 *CatsAPI* | [**GetCat**](docs/CatsAPI.md#getcat) | **Get** /cats/{id} | Get information about a specific cat
 *CatsAPI* | [**GetCats**](docs/CatsAPI.md#getcats) | **Get** /cats | Get a list of all cats
 *CatsAPI* | [**UpdateCat**](docs/CatsAPI.md#updatecat) | **Put** /cats/{id} | Update information about a specific cat
+*DogsAPI* | [**GetDogs**](docs/DogsAPI.md#getdogs) | **Get** /dogs | Get a list of all dogs
 
 
 ## Documentation For Models
 
  - [Cat](docs/Cat.md)
  - [CreatedCat](docs/CreatedCat.md)
+ - [Dog](docs/Dog.md)
  - [UpdatedCat](docs/UpdatedCat.md)
 
 
